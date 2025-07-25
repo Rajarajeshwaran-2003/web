@@ -23,12 +23,12 @@ const About = () => {
         <h2 className="title">About me</h2>
         <div className="about-content">
           <div className="column left">
-            <img 
-              src="/image/kannaremini.jpg" 
-              alt="Rajarajeshwaran Profile Picture"
-              className="profile-image"
-              loading="lazy"
-            />
+          <img 
+            src={`${import.meta.env.BASE_URL}image/kannaremini.jpg`} 
+            alt="Rajarajeshwaran Profile Picture"
+            className="profile-image"
+            loading="lazy"
+          />
           </div>
           <div className="column right">
             <div className="text">

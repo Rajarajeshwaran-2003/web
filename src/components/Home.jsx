@@ -113,7 +113,7 @@ const Home = () => {
 
         <div className="home-image">
           <img
-            src="/image/kanna.jpg"
+            src={`${import.meta.env.BASE_URL}image/kanna.jpg`} 
             alt="Rajarajeshwaran's Profile"
             className="profile-img"
           />
