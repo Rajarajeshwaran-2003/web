@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 
 
 export default defineConfig({
-  base: '/rajarajeshwaran-webfolio-/',  // same as repo name with trailing slash
+  base: '/rajarajeshwaran-webfolio/',  // same as repo name with trailing slash
   plugins: [react()],
 
 });
