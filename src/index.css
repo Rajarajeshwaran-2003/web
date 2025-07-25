@@ -1,0 +1,3983 @@
+/* --- Universal Styles & Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
+:root {
+    /* Base Font Size - serves as the reference for 'rem' and 'calc' units */
+    --base-font-size: 16px;
+
+     /* Light Mode Colors (Default) */
+    --primary-color: #6200ea; /* Deep, rich purple/indigo - Modern & Trustworthy */
+    --primary-color-rgb: 98, 0, 234;
+    --secondary-color: #ff9800; /* Warm, inviting orange - Energetic accent */
+    --accent-color: #00c853; /* Vibrant emerald green - Success, go */
+    --background-color: #f8f9fa; /* Very light grey - Clean & Airy */
+    --card-background: #ffffff; /* Pure white */
+    --text-color: #343a40; /* Dark charcoal - Readable */
+    --heading-color: #212529; /* Near black - Strong headings */
+    --link-color: #03a9f4; /* Bright sky blue - Clear links */
+    --link-hover-color: #0288d1;
+    --border-color: #e9ecef; /* Subtle light border */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Lighter, softer shadow */
+    --input-background: #fdfdfd;
+    --input-border: #ced4da;
+    --button-text-color: #ffffff;
+    --success-color: #28a745; /* Standard green */
+    --error-color: #dc3545; /* Standard red */
+
+    /* Dark Mode Colors */
+    --dark-primary-color: #bb86fc; /* Lighter purple/indigo - Accessible in dark */
+    --dark-primary-color-rgb: 187, 134, 252;
+    --dark-secondary-color: #ffb74d; /* Lighter orange */
+    --dark-accent-color: #69f0ae; /* Brighter emerald green */
+    --dark-background-color: #121212; /* Very dark almost black - True dark mode */
+    --dark-card-background: #1e1e1e; /* Slightly lighter dark for cards */
+    --dark-text-color: #e0e0e0; /* Off-white for readability */
+    --dark-heading-color: #ffffff; /* Pure white */
+    --dark-link-color: #81d4fa; /* Lighter sky blue */
+    --dark-link-hover-color: #4fc3f7;
+    --dark-border-color: #333333; /* Dark border */
+    --dark-shadow-color: rgba(0, 0, 0, 0.5); /* Stronger dark shadow */
+    --dark-input-background: #2a2a2a;
+    --dark-input-border: #444444;
+    --dark-button-text-color: #121212; /* Dark button text for light buttons */
+    /* Typography */
+    --font-poppins: 'Poppins', sans-serif;
+    --font-ubuntu: 'Ubuntu', sans-serif;
+
+    /* Fluid Spacing (using clamp() for responsiveness across all devices) */
+    --spacing-xxs: clamp(2px, 0.5vw + 0.1rem, 4px);   /* Added rem for better baseline */
+    --spacing-xs: clamp(4px, 1vw + 0.2rem, 8px);     
+    --spacing-sm: clamp(8px, 2vw + 0.3rem, 16px);    
+    --spacing-md: clamp(12px, 3vw + 0.5rem, 24px);   
+    --spacing-lg: clamp(20px, 4vw + 0.8rem, 32px);   
+    --spacing-xl: clamp(32px, 5vw + 1rem, 48px);   
+    --spacing-xxl: clamp(48px, 6vw + 1.2rem, 72px);  
+
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    /* Transitions (for smooth UI changes) */
+    --transition-ease: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* More natural easing */
+    --transition-fast: all 0.15s ease-out;   /* For quicker interactions like button states */
+
+    /* Max Width for content containers */
+    --max-content-width: 1300px;
+}
+
+/* Dark Mode Class (Applies when `html` element has `dark-mode` class) */
+html.dark-mode {
+    --primary-color: var(--dark-primary-color);
+    --primary-color-rgb: var(--dark-primary-color-rgb);
+    --secondary-color: var(--dark-secondary-color);
+    --accent-color: var(--dark-accent-color);
+    --background-color: var(--dark-background-color);
+    --card-background: var(--dark-card-background);
+    --text-color: var(--dark-text-color);
+    --heading-color: var(--dark-heading-color);
+    --link-color: var(--dark-link-color);
+    --link-hover-color: var(--dark-link-hover-color);
+    --border-color: var(--dark-border-color);
+    --shadow-color: var(--dark-shadow-color);
+    --input-background: var(--dark-input-background);
+    --input-border: var(--dark-input-border);
+    --button-text-color: var(--dark-button-text-color);
+    --success-color: var(--dark-accent-color);
+    --error-color: var(--dark-secondary-color);
+}
+
+/* --- Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none; /* Manage focus states with :focus-visible for accessibility */
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: var(--base-font-size);
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-poppins);
+    color: var(--text-color);
+    background: var(--background-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition-ease), color var(--transition-ease);
+}
+
+/* --- Utility Classes --- */
+.max-width {
+    max-width: var(--max-content-width);
+    padding: 0 var(--spacing-lg);
+    margin: auto;
+}
+
+.title {
+    position: relative;
+    text-align: center;
+    font-size: clamp(2rem, 2.3vw + 0.5rem, 3.5rem); /* More aggressive fluid scaling for titles */
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-sm);
+    font-family: var(--font-ubuntu);
+    color: var(--heading-color);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.08); /* Slightly stronger shadow */
+    opacity: 0; /* Hidden by default for animation */
+    transform: translateY(20px); /* Starts below for animation */
+    animation: fade-in-up 0.8s ease-out forwards; /* Applied on load (or via JS for scroll-in) */
+    animation-delay: 0.2s; /* Slight delay for effect */
+}
+
+.title::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: clamp(80px, 15vw + 1rem, 120px); /* Wider fluid underline */
+    height: 4px; /* Thicker underline */
+    background: var(--primary-color);
+    transform: translateX(-50%) scaleX(0); /* Starts scaled down for animation */
+    transform-origin: center;
+    animation: expand-line 0.6s ease-out forwards; /* Underline animation */
+    animation-delay: 0.5s; /* Delay after text appears */
+}
+
+.title::after {
+    content: attr(data-text);
+    position: absolute;
+    bottom: -18px; /* Slightly lower */
+    left: 50%;
+    font-size: clamp(0.9rem, 2.5vw + 0.2rem, 1.2rem); /* Fluid and slightly larger text */
+    color: var(--primary-color);
+    padding: 0 var(--spacing-xs);
+    background: var(--background-color);
+    transform: translateX(-50%) scale(0.8); /* Starts smaller for animation */
+    opacity: 0;
+    animation: fade-in-scale 0.7s ease-out forwards; /* After text and line */
+    animation-delay: 0.7s;
+    z-index: 1;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: clamp(1rem, 2.5vw + 0.1rem, 1.4rem); /* Fluid size for subtitles */
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-color);
+    line-height: 1.4;
+    opacity: 0;
+    animation: fade-in 1s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    font-size: clamp(0.9rem, 2vw + 0.1rem, 1.1rem);
+    font-weight: 600;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    border: 2px solid var(--primary-color);
+    transition: var(--transition-ease);
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--shadow-color); /* More pronounced initial shadow */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fade-in-up 0.8s ease-out forwards;
+    animation-delay: 1s; /* Appear last */
+}
+
+.btn:hover {
+    color: var(--primary-color);
+    background: none;
+    transform: translateY(-5px) scale(1.03); /* More dynamic hover */
+    box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.2); /* Shadow with primary color tint */
+    border-color: var(--primary-color);
+}
+
+.btn:active {
+    transform: translateY(-2px) scale(0.98); /* Click feedback */
+    box-shadow: 0 3px 8px rgba(var(--primary-color-rgb), 0.3);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important; /* Ensure animations don't loop */
+    }
+    .title, .subtitle, .btn, .scroll-up-btn { /* Make sure elements are visible */
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+}
+
+/* Scroll Up Button */
+.scroll-up-btn {
+    position: fixed;
+    height: clamp(40px, 8vw, 55px); /* Slightly larger max size */
+    width: clamp(40px, 8vw, 55px);
+    background: var(--primary-color);
+    right: var(--spacing-lg);
+    bottom: var(--spacing-md);
+    text-align: center;
+    line-height: clamp(40px, 8vw, 55px);
+    color: var(--button-text-color);
+    z-index: 1000;
+    font-size: clamp(22px, 5vw, 30px); /* Larger icon */
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out, background var(--transition-ease), box-shadow var(--transition-ease);
+    box-shadow: 0 6px 15px rgba(var(--primary-color-rgb), 0.25); /* Stronger initial shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-up-btn:hover {
+    background: var(--link-hover-color);
+    box-shadow: 0 8px 20px rgba(var(--primary-color-rgb), 0.35);
+    transform: translateY(-3px); /* More noticeable lift */
+}
+
+.scroll-up-btn.show {
+    bottom: var(--spacing-xl); /* More prominent position when shown */
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Dark mode specific for scroll up button */
+html.dark-mode .scroll-up-btn {
+    background: var(--dark-primary-color);
+    color: var(--dark-button-text-color);
+    box-shadow: 0 6px 15px var(--dark-shadow-color);
+}
+
+html.dark-mode .scroll-up-btn:hover {
+    background: var(--dark-link-hover-color);
+    box-shadow: 0 8px 20px var(--dark-shadow-color);
+}
+
+/* --- Keyframe Animations --- */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes expand-line {
+    from {
+        transform: translateX(-50%) scaleX(0);
+    }
+    to {
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+@keyframes fade-in-scale {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Optional: Subtle background animation for body */
+@keyframes background-pulse {
+    0% { background-color: var(--background-color); }
+    50% { background-color: color-mix(in srgb, var(--background-color) 98%, var(--primary-color) 2%); }
+    100% { background-color: var(--background-color); }
+}
+
+body {
+    animation: background-pulse 15s infinite alternate ease-in-out;
+}
+
+html.dark-mode body {
+    animation: dark-background-pulse 15s infinite alternate ease-in-out;
+}
+
+@keyframes dark-background-pulse {
+    0% { background-color: var(--dark-background-color); }
+    50% { background-color: color-mix(in srgb, var(--dark-background-color) 98%, var(--dark-primary-color) 2%); }
+    100% { background-color: var(--dark-background-color); }
+}
+
+
+
+
+
+
+
+
+        /* --------------------------------------------------------------------------Navbar--------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+/* Navbar Styling */
+.navbar {
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    padding: var(--spacing-sm) var(--spacing-lg); /* Fluid padding using variables */
+    font-family: var(--font-ubuntu);
+    background: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    /* Smoother, more comprehensive transition for all properties that change */
+    transition: background var(--transition-ease), /* 'transform' removed as 'hidden' is gone */
+                padding var(--transition-ease),
+                box-shadow var(--transition-ease),
+                border-bottom var(--transition-ease);
+    box-shadow: 0 1px 3px var(--shadow-color); /* Subtle initial shadow */
+}
+
+/* Navbar Sticky State */
+.navbar.sticky {
+    background: var(--card-background);
+    padding: var(--spacing-xs) var(--spacing-lg); /* Slightly reduced padding when sticky */
+    box-shadow: 0 4px 10px var(--shadow-color); /* More pronounced shadow */
+    border-bottom-color: transparent; /* Remove border when shadow takes over */
+}
+
+/* Removed the .navbar.hidden rule entirely to ensure it's always visible */
+/* The corresponding JavaScript that adds/removes this class will now have no visual effect for hiding. */
+
+/* Max-width container within navbar for content alignment */
+.navbar .max-width {
+    max-width: 1300px; /* Max width for large screens */
+    margin: 0 auto; /* Center the content */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40px; /* Consistent height for the navbar */
+    transition: min-height var(--transition-ease); /* Smooth height transition */
+}
+
+.navbar.sticky .max-width {
+    min-height: 60px; /* Slightly shorter when sticky */
+}
+
+/* Logo Styling */
+.navbar .logo a {
+    color: var(--primary-color);
+    /* Fluid font size: scales from 1.5 to 1.75 times base, adapts with viewport */
+    font-size: clamp(calc(var(--base-font-size) * 1.5), 3vw, calc(var(--base-font-size) * 1.75));
+    font-weight: 700; /* Bolder logo */
+    text-decoration: none;
+    letter-spacing: -0.5px; /* Subtle negative letter spacing for modern feel */
+    line-height: 1; /* Ensures text is single line and vertically centered */
+    display: flow-root; /* For precise alignment if logo contains multiple elements */
+    align-items: center;
+}
+
+.navbar .logo a span {
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+}
+
+/* Ensure logo colors remain consistent in sticky state */
+.navbar.sticky .logo a {
+    color: var(--primary-color);
+}
+.navbar.sticky .logo a span {
+    color: var(--secondary-color);
+}
+
+/* Main Navigation Menu Styling */
+.navbar .menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .menu li {
+    margin: 0 var(--spacing-sm); /* Fluid horizontal spacing */
+}
+
+.navbar .menu li a,
+.navbar .menu li button {
+    display: flex; /* Centers text and icons within the link/button */
+    align-items: center;
+    justify-content: center;
+    color: var(--heading-color);
+    /* Fluid font size for menu items */
+    font-size: clamp(calc(var(--base-font-size) * 1), 1.2vw, calc(var(--base-font-size) * 1.125));
+    font-weight: 500;
+    transition: var(--transition-ease);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    outline: none; /* Remove default focus outline for better custom focus styles */
+}
+
+/* Hover/Active states for menu items */
+.navbar .menu li a:hover,
+.navbar .menu li button:hover,
+.navbar .menu li .active-link {
+    color: var(--primary-color);
+    /* Use RGB variable for rgba background for seamless theme changes */
+    background: rgba(var(--primary-color-rgb), 0.1);
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+.navbar.sticky .menu li a:hover,
+.navbar.sticky .menu li button:hover,
+.navbar.sticky .menu li .active-link {
+    color: var(--primary-color);
+    background: rgba(var(--primary-color-rgb), 0.15); /* Slightly more prominent background when sticky */
+}
+
+/* Dark Mode Toggle button */
+.navbar .dark-mode-toggle {
+    font-size: clamp(20px, 3vw, 26px); /* Fluid size for toggle icon */
+    margin-left: var(--spacing-md); /* Fluid margin */
+    color: var(--heading-color);
+    cursor: pointer;
+    transition: var(--transition-ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px; /* Larger tap target */
+    border-radius: 50%; /* Circular shape */
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.navbar .dark-mode-toggle:hover {
+    color: var(--primary-color);
+    background: rgba(var(--primary-color-rgb), 0.1);
+}
+
+/* Hamburger Menu button */
+.navbar .hamburger {
+    color: var(--heading-color);
+    font-size: clamp(22px, 3.5vw, 28px); /* Fluid size for hamburger icon */
+    cursor: pointer;
+    display: none; /* Hidden by default on larger screens */
+    transition: var(--transition-ease);
+    background: none;
+    border: none;
+    padding: 10px; /* Large tap target */
+    border-radius: var(--border-radius-sm);
+    outline: none;
+}
+
+.navbar .hamburger:hover {
+    color: var(--primary-color);
+    background: rgba(var(--primary-color-rgb), 0.1);
+}
+
+/* --- Dark Mode Overrides (for html.dark-mode class) --- */
+html.dark-mode {
+    /* Re-map general theme variables to their dark mode counterparts */
+    --text-color: var(--dark-text-color);
+    --background-color: var(--dark-background-color);
+    --card-background: var(--dark-card-background);
+    --border-color: var(--dark-border-color);
+    --shadow-color: var(--dark-shadow-color);
+    --primary-color: var(--dark-primary-color);
+    --secondary-color: var(--dark-secondary-color);
+    --heading-color: var(--dark-heading-color);
+}
+
+/* These specific overrides ensure elements adapt even if general variables are not re-mapped */
+html.dark-mode .navbar {
+    background: var(--dark-background-color);
+    border-bottom-color: var(--dark-border-color);
+    box-shadow: 0 1px 3px var(--dark-shadow-color);
+}
+
+html.dark-mode .navbar.sticky {
+    background: var(--dark-card-background);
+    box-shadow: 0 4px 10px var(--dark-shadow-color);
+}
+
+html.dark-mode .navbar .logo a {
+    color: var(--dark-primary-color);
+}
+html.dark-mode .navbar .logo a span {
+    color: var(--dark-secondary-color);
+}
+/* Ensure sticky logo colors are also dark-mode aware */
+html.dark-mode .navbar.sticky .logo a {
+    color: var(--dark-primary-color);
+}
+html.dark-mode .navbar.sticky .logo a span {
+    color: var(--dark-secondary-color);
+}
+
+html.dark-mode .navbar .menu li a,
+html.dark-mode .navbar .menu li button {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .navbar .menu li a:hover,
+html.dark-mode .navbar .menu li button:hover,
+html.dark-mode .navbar .menu li .active-link {
+    color: var(--dark-primary-color);
+    background: rgba(var(--dark-primary-color-rgb), 0.15);
+}
+
+html.dark-mode .navbar.sticky .menu li a:hover,
+html.dark-mode .navbar.sticky .menu li button:hover,
+html.dark-mode .navbar.sticky .menu li .active-link {
+    color: var(--dark-primary-color);
+    background: rgba(var(--dark-primary-color-rgb), 0.2);
+}
+
+html.dark-mode .navbar .dark-mode-toggle {
+    color: var(--dark-heading-color);
+}
+html.dark-mode .navbar .dark-mode-toggle:hover {
+    color: var(--dark-primary-color);
+    background: rgba(var(--dark-primary-color-rgb), 0.15);
+}
+
+html.dark-mode .navbar .hamburger {
+    color: var(--dark-heading-color);
+}
+html.dark-mode .navbar .hamburger:hover {
+    color: var(--dark-primary-color);
+    background: rgba(var(--dark-primary-color-rgb), 0.15);
+}
+
+/* --- Responsive Adjustments (Media Queries) --- */
+
+/* For smaller desktops and large tablets (e.g., iPad Pro in portrait) */
+@media (max-width: 1024px) {
+    .navbar .max-width {
+        max-width: 90%; /* Give some breathing room on smaller wide screens */
+    }
+    .navbar .menu li {
+        margin: 0 var(--spacing-xs); /* Tighter menu items */
+    }
+}
+
+/* For Tablets (Portrait) and larger Phones */
+@media (max-width: 768px) {
+    .navbar .max-width {
+        max-width: 100%; /* Full width for mobile/tablet */
+        padding: 0 var(--spacing-md); /* Fluid horizontal padding */
+        min-height: 60px; /* Shorter navbar on mobile */
+    }
+
+    .navbar.sticky .max-width {
+        min-height: 50px; /* Even shorter when sticky on mobile */
+    }
+
+    .navbar .menu {
+        position: fixed;
+        top: 0;
+        /* Matches the initial height of the navbar on mobile/tablet */
+        margin-top: 60px;
+        height: calc(100vh - 60px); /* Fill remaining viewport height */
+        width: 100%;
+        left: -100%; /* Hidden off-screen by default (for mobile menu) */
+        background: var(--card-background); /* Menu background */
+        text-align: center;
+        padding-top: var(--spacing-lg); /* Padding inside the mobile menu */
+        flex-direction: column; /* Stack items vertically */
+        justify-content: flex-start; /* Align items to the top */
+        z-index: 998; /* Below hamburger, above content */
+        overflow-y: auto; /* Enable scrolling for long menus */
+        transition: left 0.3s ease-in-out, background var(--transition-ease); /* Smooth slide and background change */
+        box-shadow: 0 4px 8px var(--shadow-color); /* Subtle shadow for mobile menu */
+    }
+
+    .navbar .menu.active {
+        left: 0; /* Slide menu in when 'active' class is present */
+    }
+
+    .navbar .menu li {
+        margin: var(--spacing-md) 0; /* Vertical spacing for mobile menu items */
+    }
+
+    .navbar .menu li a,
+    .navbar .menu li button {
+        font-size: clamp(calc(var(--base-font-size) * 1.2), 4vw, calc(var(--base-font-size) * 1.4)); /* Larger font for better readability on small screens */
+        display: block; /* Make the entire area clickable */
+        width: 100%;
+        padding: var(--spacing-sm) 0; /* Add vertical padding for touch targets */
+    }
+
+    .navbar .hamburger {
+        display: block; /* Show hamburger icon */
+    }
+
+    .navbar .dark-mode-toggle {
+        margin-left: var(--spacing-sm); /* Adjust spacing to fit better on mobile */
+        font-size: clamp(20px, 3.5vw, 24px); /* Smaller on smaller screens */
+    }
+}
+
+/* For extra small screens (e.g., old phones, very narrow viewports) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: var(--spacing-xs) var(--spacing-md); /* Even tighter padding */
+    }
+    .navbar .max-width {
+        min-height: 55px; /* Adjust height slightly for very small screens */
+    }
+    .navbar.sticky .max-width {
+        min-height: 45px;
+    }
+    .navbar .logo a {
+        font-size: clamp(calc(var(--base-font-size) * 1.3), 5vw, calc(var(--base-font-size) * 1.5)); /* Adjust logo size */
+    }
+    .navbar .menu {
+        margin-top: 55px; /* Adjust mobile menu top margin */
+        height: calc(100vh - 55px);
+        padding-top: var(--spacing-md); /* Less internal padding */
+    }
+    .navbar .menu li {
+        margin: var(--spacing-sm) 0; /* Tighter vertical spacing */
+    }
+}
+
+
+
+
+
+        /*  -------------------------------------------------------------------------Home Section----------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+/* --- Base Body and HTML Styles (Consider adding these for consistency) --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-ubuntu);
+    line-height: 1.6;
+    color: #fff; /* Default text color for the whole page */
+    background-color: rgb(33, 33, 33); /* Matches your home section background */
+}
+
+/* --- Home Section Styles --- */
+.home {
+    filter: brightness(1.29999999999);
+    background-image: url("/image/banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(33, 33, 33);
+    display: flex;
+    /* If you want a background image, uncomment and set properties: */
+    /* background-image: url('path/to/your/image.jpg'); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh; /* Make the home section take full viewport height */
+    color: #fff;
+    min-height: 500px;
+    font-family: var(--font-ubuntu);
+    position: relative;
+    align-items: center; /* Vertically center content and image */
+    justify-content: center; /* Horizontally center the layout container */
+    overflow: hidden; /* Important to prevent pseudo-element glows from causing scrollbars */
+}
+
+.home::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Overlay for readability, adjust color/opacity as desired */
+    z-index: 1;
+}
+
+/* New container to hold content and image side-by-side */
+.home .home-layout-container {
+    display: flex;
+    align-items: center; /* Aligns content and image vertically */
+    justify-content: center; /* Centers content and image if space allows */
+    gap: 40px; /* Space between the text content and the image */
+    position: relative; /* Ensure this container is above the ::before overlay */
+    z-index: 2;
+    width: 100%; /* Takes full width of max-width */
+    max-width: 1300px; /* Example: set your desired max-width for the content area */
+    padding: var(--spacing-lg); /* Padding around the content and image */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.home .home-content {
+    position: relative;
+    z-index: 2;
+    text-align: left; /* Align text within the content column to the left */
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    background: rgba(0, 0, 0, 0.4); /* Background for the text content box */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Shadow for the text content box */
+    flex: 1; /* Allows the content to take up available space */
+    min-width: 300px; /* Prevent content from becoming too narrow */
+    max-width: 600px; /* Limit content width for better readability */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.home .home-content .text-1 {
+    font-size: calc(var(--base-font-size) * 1.5);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.home .home-content .text-2 {
+    font-size: calc(var(--base-font-size) * 3.5);
+    font-weight: 600;
+    margin-left: -3px;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home .home-content .text-3 {
+    font-size: calc(var(--base-font-size) * 2.2);
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.home .home-content .text-3 span.typing {
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.home .home-content .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.home .home-content .hire-me-btn {
+    color: #fff;
+    background: var(--primary-color);
+    font-size: calc(var(--base-font-size) * 1.25);
+    padding: 12px 24px;
+    border-radius: var(--border-radius-sm);
+    border: 2px solid var(--primary-color);
+    transition: var(--transition-ease);
+    margin-top: var(--spacing-lg);
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+.home .home-content .hire-me-btn:hover {
+    background: none;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Social Links Styling - ENHANCED */
+.home-buttons { /* This container might need to be added to your HTML around the button and social links */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Increased gap for better spacing */
+    margin-top: 2rem; /* Increased margin-top to separate from button */
+    align-items: flex-start; /* Align to the left, consistent with text-align: left */
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    width: 45px; /* Slightly larger icon */
+    height: 45px; /* Slightly larger icon */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem; /* Larger icon font size */
+    transition: all 0.3s ease-in-out; /* Smoother transition */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle initial shadow */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle border */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.social-icon:hover {
+    background: rgba(255, 255, 255, 0.25); /* More pronounced background on hover */
+    transform: translateY(-5px) scale(1.1); /* More pronounced lift and slight scale */
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.3), /* Deeper shadow */
+        0 0 15px var(--primary-color), /* Primary color glow */
+        0 0 25px var(--secondary-color); /* Secondary color glow */
+    border-color: rgba(255, 255, 255, 0.4); /* Border becomes more visible */
+}
+
+/* Make sure Font Awesome is included in your project for the icons (e.g., <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">) */
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-ubuntu);
+    line-height: 1.6;
+    color: #fff; /* Default text color for the whole page */
+    background-color: rgb(33, 33, 33); /* Matches your home section background */
+}
+
+/* --- Home Section Styles --- */
+.home {
+    background-color: rgb(33, 33, 33);
+    display: flex;
+    /* If you want a background image, uncomment and set properties: */
+    /* background-image: url('path/to/your/image.jpg'); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh; /* Make the home section take full viewport height */
+    color: #fff;
+    min-height: 500px;
+    font-family: var(--font-ubuntu);
+    position: relative;
+    align-items: center; /* Vertically center content and image */
+    justify-content: center; /* Horizontally center the layout container */
+    overflow: hidden; /* Important to prevent pseudo-element glows from causing scrollbars */
+}
+
+.home::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Overlay for readability, adjust color/opacity as desired */
+    z-index: 1;
+}
+
+/* New container to hold content and image side-by-side */
+.home .home-layout-container {
+    display: flex;
+    align-items: center; /* Aligns content and image vertically */
+    justify-content: center; /* Centers content and image if space allows */
+    gap: 40px; /* Space between the text content and the image */
+    position: relative; /* Ensure this container is above the ::before overlay */
+    z-index: 2;
+    width: 100%; /* Takes full width of max-width */
+    max-width: 1300px; /* Example: set your desired max-width for the content area */
+    padding: var(--spacing-lg); /* Padding around the content and image */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.home .home-content {
+    position: relative;
+    z-index: 2;
+    text-align: left; /* Align text within the content column to the left */
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    background: rgba(0, 0, 0, 0.4); /* Background for the text content box */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Shadow for the text content box */
+    flex: 1; /* Allows the content to take up available space */
+    min-width: 300px; /* Prevent content from becoming too narrow */
+    max-width: 600px; /* Limit content width for better readability */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.home .home-content .text-1 {
+    font-size: calc(var(--base-font-size) * 1.5);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.home .home-content .text-2 {
+    font-size: calc(var(--base-font-size) * 3.5);
+    font-weight: 600;
+    margin-left: -3px;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home .home-content .text-3 {
+    font-size: calc(var(--base-font-size) * 2.2);
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.home .home-content .text-3 span.typing {
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.home .home-content .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.home .home-content .hire-me-btn {
+    color: #fff;
+    background: var(--primary-color);
+    font-size: calc(var(--base-font-size) * 1.25);
+    padding: 12px 24px;
+    border-radius: var(--border-radius-sm);
+    border: 2px solid var(--primary-color);
+    transition: var(--transition-ease);
+    margin-top: var(--spacing-lg);
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+.home .home-content .hire-me-btn:hover {
+    background: none;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Social Links Styling - ENHANCED */
+.home-buttons { /* This container might need to be added to your HTML around the button and social links */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Increased gap for better spacing */
+    margin-top: 2rem; /* Increased margin-top to separate from button */
+    align-items: flex-start; /* Align to the left, consistent with text-align: left */
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    width: 45px; /* Slightly larger icon */
+    height: 45px; /* Slightly larger icon */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem; /* Larger icon font size */
+    transition: all 0.3s ease-in-out; /* Smoother transition */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle initial shadow */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle border */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.social-icon:hover {
+    background: rgba(255, 255, 255, 0.25); /* More pronounced background on hover */
+    transform: translateY(-5px) scale(1.1); /* More pronounced lift and slight scale */
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.3), /* Deeper shadow */
+        0 0 15px var(--primary-color), /* Primary color glow */
+        0 0 25px var(--secondary-color); /* Secondary color glow */
+    border-color: rgba(255, 255, 255, 0.4); /* Border becomes more visible */
+}
+
+/* Make sure Font Awesome is included in your project for the icons (e.g., <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">) */
+
+
+/* --- Image specific styling for the Home page --- */
+
+.home .home-image {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    perspective: 1000px; /* Essential for 3D transforms */
+}
+
+/* ===== Base Profile Image Styles ===== */
+.home .home-image .profile-img {
+    width: 390px;
+    height: 390px;
+    object-fit: cover; /* Use cover to ensure it fills the circle nicely */
+    border-radius: 50%; /* Circular image */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3), /* Deeper main shadow */
+                0 0 0 5px rgba(255, 255, 255, 0.1),
+                0 0 50px rgba(248, 244, 247, 0.5), /* Permanent greenish-blue glow */
+                0 0 80px rgba(226, 222, 226, 0.5); /* Permanent purpleish-blue glow */
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                filter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); /* Added filter to transition */
+    position: relative;
+    z-index: 1; /* Keep image above pseudo-elements */
+    overflow: hidden; /* Important to clip content for perfect circle */
+    /* If you're using an <img> tag directly, apply this to the <img> */
+    /* If using a div with background-image, apply to the div */
+}
+
+/* ===== Pseudo-element for layered effect (Before) ===== */
+/* Note: For pseudo-elements on an <img> tag, you might need to wrap the <img>
+    in a container div and apply the pseudo-elements to the container.
+    If .profile-img is already a container div with a background-image, this is fine.
+    Assuming .profile-img refers to the actual image element or a div wrapper. */
+.home .home-image .profile-img::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Offset to create a gap */
+    left: -10px; /* Offset to create a gap */
+    right: -10px; /* Offset to create a gap */
+    bottom: -10px; /* Offset to create a gap */
+    border-radius: 50%;
+    border: 3px solid #80ed99; /* Greenish-blue neon color */
+    opacity: 0.7; /* Always visible permanent glow */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: scale(1); /* Start at original size */
+    z-index: -1; /* Behind the image */
+    animation: pulseBorder1 3s infinite alternate ease-in-out; /* Always running animation */
+}
+
+/* ===== Pseudo-element for layered effect (After) ===== */
+.home .home-image .profile-img::after {
+    content: '';
+    position: absolute;
+    top: -5px; /* Different offset for second layer */
+    left: -5px; /* Different offset for second layer */
+    right: -5px; /* Different offset for second layer */
+    bottom: -5px; /* Different offset for second layer */
+    border-radius: 50%;
+    border: 3px solid #6c70dc; /* Purpleish-blue neon color */
+    opacity: 0.7; /* Always visible permanent glow */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition-delay: 0.1s; /* Slightly delayed for sequential effect */
+    transform: scale(1); /* Start at original size */
+    z-index: -2; /* Even further behind */
+    animation: pulseBorder2 3s infinite alternate ease-in-out 0.2s; /* Always running animation */
+}
+
+/* ===== Hover Effects (Applied to All Versions) ===== */
+.home .home-image .profile-img:hover {
+    transform: scale(1) rotateY(3deg) rotateX(1deg); /* More pronounced 3D effect and scale */
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5), /* Much deeper and darker main shadow */
+                0 0 15px #cfe4d4, /* Stronger green glow */
+                0 0 25px #b1b2d5; /* Stronger purple glow */
+    filter: brightness(90%) drop-shadow(0 0 20px #ecf1d8); /* Brightens image slightly and adds a strong, circular drop shadow */
+    cursor: pointer;
+}
+
+/* ===== Hover Effects for Pseudo-elements ===== */
+.home .home-image .profile-img:hover::before,
+.home .home-image .profile-img:hover::after {
+    opacity: 1; /* Make them fully visible on hover */
+    transform: scale(1.02); /* Slight scale to enhance hover */
+    animation: none; /* Stop the pulsing animation on hover for a cleaner transition to full glow */
+}
+
+/* Keyframe Animations */
+@keyframes pulseBorder1 {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.02); opacity: 0.85; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+@keyframes pulseBorder2 {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.02); opacity: 0.85; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+/* --- Common Section Styling (from your original snippet) --- */
+section {
+    padding: 80px 0;
+    background: var(--background-color);
+    box-sizing: border-box; /* Ensure padding is included in height/width */
+}
+
+section .title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+section .title::before {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 180px;
+    height: 3px;
+    background: var(--primary-color);
+    transform: translateX(-50%);
+}
+
+section .title::after {
+    content: "what I do"; /* Example for Services section, adjust as needed */
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    font-size: 20px;
+    color: var(--primary-color);
+    padding: 5px;
+    background: var(--background-color); /* This should match the section's background */
+    transform: translateX(-50%);
+}
+
+
+.services, .projects, .internships {
+    background: var(--card-background); /* Slightly different background for these sections */
+}
+
+.services .title::after { content: "what I offer"; background: var(--card-background); } /* Example */
+.projects .title::after { content: "my work"; background: var(--card-background); } /* Example */
+.internships .title::after { content: "my experience"; background: var(--card-background); } /* Example */
+
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 991px) {
+    .home .home-layout-container {
+        flex-direction: column; /* Stack content and image vertically on smaller screens */
+        text-align: center; /* Center items when stacked */
+        gap: 30px; /* Reduce gap when stacked */
+        padding: var(--spacing-md); /* Adjust padding */
+    }
+
+    .home .home-content {
+        text-align: center; /* Center text within its div when stacked */
+        margin-bottom: 0; /* No extra margin when stacked, gap handles it */
+        max-width: 90%; /* Allow content to take more width, but not full edge-to-edge */
+        margin-left: auto; /* Center the block */
+        margin-right: auto; /* Center the block */
+    }
+
+    .home .home-image .profile-img {
+        width: 300px; /* Adjust size for medium screens */
+        height: 300px;
+    }
+
+    .home-buttons {
+        align-items: center; /* Center social buttons when content is centered */
+    }
+
+    section {
+        padding: 60px 0; /* Adjust section padding */
+    }
+
+    section .title {
+        font-size: 35px;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .home .home-content .text-2 {
+        font-size: calc(var(--base-font-size) * 2.8);
+    }
+
+    .home .home-content .text-3 {
+        font-size: calc(var(--base-font-size) * 1.6);
+    }
+
+    .home .home-image .profile-img {
+        width: 250px; /* Adjust size for tablets */
+        height: 250px;
+    }
+
+    section .title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .home {
+        min-height: 400px; /* Allow home section to be a bit smaller on very small screens */
+    }
+
+    .home .home-content .text-1 {
+        font-size: calc(var(--base-font-size) * 1.2);
+    }
+
+    .home .home-content .text-2 {
+        font-size: calc(var(--base-font-size) * 2.2);
+    }
+
+    .home .home-content .text-3 {
+        font-size: calc(var(--base-font-size) * 1.3);
+    }
+
+    .home .home-image .profile-img {
+        width: 180px; /* Adjust size for mobile */
+        height: 180px;
+    }
+
+    .home .home-content .hire-me-btn {
+        font-size: calc(var(--base-font-size) * 1.1);
+        padding: 10px 20px;
+    }
+
+    .home .home-layout-container {
+        padding: var(--spacing-sm); /* Further reduce padding on small screens */
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+
+    section .title {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    section .title::after {
+        font-size: 16px;
+    }
+}
+
+/* --- Accessibility: Reduce Motion --- */
+@media (prefers-reduced-motion: reduce) {
+    .home .home-image .profile-img,
+    .home .home-image .profile-img::before,
+    .home .home-image .profile-img::after,
+    .home .home-content .hire-me-btn,
+    .social-icon {
+        transition: none !important; /* Disable all transitions */
+        animation: none !important; /* Disable all animations */
+    }
+
+    .home .home-image .profile-img {
+        transform: none; /* No 3D transform on hover */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
+                    0 0 0 5px rgba(255, 255, 255, 0.1); /* Revert to base shadow */
+        filter: none; /* Remove filter */
+    }
+
+    .home .home-image .profile-img::before,
+    .home .home-image .profile-img::after {
+        opacity: 0.7 !important; /* Keep permanent glow visible but static */
+        transform: scale(1) !important;
+    }
+
+    .home .home-image .profile-img:hover {
+        /* Maintain some visual feedback on hover without animations/transforms */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
+                    0 0 0 5px rgba(255, 255, 255, 0.1),
+                    0 0 12px rgba(128, 237, 153, 0.6), /* Slightly brighter glow on hover */
+                    0 0 18px rgba(108, 112, 220, 0.6); /* Slightly brighter glow on hover */
+    }
+
+    .home .home-image .profile-img:hover::before,
+    .home .home-image .profile-img:hover::after {
+        opacity: 0.8 !important; /* Slightly more opaque on hover */
+    }
+
+    .home .home-content .hire-me-btn:hover {
+        transform: none;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-icon:hover {
+        transform: none;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+}
+
+
+
+
+
+
+
+
+
+        /* -----------------------------------------------------------------------About Section --------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+        
+
+/* Animation for the background, moved to the top for clarity */
+@keyframes backgroundPan {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Add the following for the .about section background and hover animation */
+.about {
+     filter: brightness(1.29999999999);
+    /* Base background with a linear gradient */
+    background: linear-gradient(
+        270deg, /* Gradient direction */
+        var(--background-color),      /* Start with your main background color */
+        var(--card-background),      /* Transition to your card background color */
+        var(--background-color)      /* End back at your main background color */
+    );
+    background-size: 200% 100%; /* Make the background wider to allow panning */
+    background-position: 0% 50%; /* Initial position of the gradient */
+    transition: background-position 0.6s ease-out; /* Smooth transition for background movement */
+
+    padding: 80px 0; /* Example padding, adjust as needed */
+    position: relative;
+    overflow: hidden; /* Ensures any shadows or transforms don't cause scrollbars */
+}
+
+.about:hover {
+    background-position: 100% 50%; /* Triggers the background pan on hover */
+}
+
+.about .about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.about .about-content .column {
+    width: calc(50% - var(--spacing-lg));
+    padding: var(--spacing-sm);
+    box-sizing: border-box;
+}
+
+.about .about-content .left {
+    text-align: center;
+    position: relative;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about .about-content .left img {
+    width: 390px;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.596);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2),
+                0 0 10px rgba(255, 255, 255, 0.1),
+                0 0 50px rgb(149, 0, 255), /* Always present primary glow */
+                0 0 80px rgb(171, 113, 238); /* Always present secondary glow */
+    filter: brightness(95%);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1),
+                box-shadow 0.8s cubic-bezier(0.25, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.25, 1, 0.3, 1);
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Pseudo-elements for glowing, layered border effect - ALWAYS VISIBLE */
+.about .about-content .left img::before,
+.about .about-content .left img::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    transform: translate(-10%, -10%) scale(0.2);
+    border-radius: 50%;
+    opacity: 0.7; /* Always slightly visible */
+    z-index: 1;
+    animation: pulsateGlow 3s infinite alternate ease-in-out;
+}
+
+.about .about-content .left img::before {
+    width: 110%;
+    height: 110%;
+    border: 3px solid var(--primary-color);
+}
+
+.about .about-content .left img::after {
+    width: 120%;
+    height: 120%;
+    border: 3px solid var(--secondary-color);
+    animation-delay: 0.5s;
+}
+
+.about .about-content .left img:hover {
+    transform: scale(1) rotateY(3deg) rotateX(1deg);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5), /* Much deeper and darker main shadow */
+                0 0 15px #e2e4b8, /* Stronger green glow */
+                0 0 25px #c8fc50; /* Stronger purple glow */
+    filter: brightness(90%) drop-shadow(0 0 20px #ecf1d8); /* Brightens image slightly and adds a strong, circular drop shadow */
+    cursor: pointer;
+}
+
+/* Enhance glow on hover */
+.about .about-content .left img:hover::before,
+.about .about-content .left img:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: pulsateGlow 1.5s infinite alternate ease-in-out;
+}
+
+.about .about-content .left img:hover::after {
+    animation-delay: 0.1s;
+}
+
+@keyframes pulsateGlow {
+    0% {
+        opacity: 0.6;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        opacity: 0.9;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        opacity: 0.6;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Rest of your existing styles... */
+.about .about-content .right .text {
+    font-size: calc(var(--base-font-size) * 1.5);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--heading-color);
+}
+
+.about .about-content .right .text span {
+    color: var(--primary-color);
+}
+
+.about .about-content .right .description {
+    text-align: justify;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+}
+
+.about .about-content .right .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.about .about-content .right .skill-item {
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    padding: 6px 12px;
+    border-radius: var(--border-radius-sm);
+    font-size: calc(var(--base-font-size) * 0.9);
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.about .about-content .right .skill-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+/* Media Queries */
+@media (max-width: 991px) {
+    .about .about-content .column {
+        width: 100%;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .about .about-content .left {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .about .about-content .left img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .about .about-content .right .text,
+    .about .about-content .right .description {
+        text-align: center;
+    }
+
+    .about .about-content .right .skills {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .about .about-content .left img {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 576px) {
+    .about .about-content .left img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .about .about-content .left img,
+    .about .about-content .left img::before,
+    .about .about-content .left img::after {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .about .about-content .left img {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2),
+                    0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .about .about-content .left img:hover {
+        transform: scale(1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        filter: brightness(100%);
+    }
+
+    .about .about-content .left img::before,
+    .about .about-content .left img::after {
+        opacity: 0;
+    }
+}
+
+/* Dark Mode Styles */
+html.dark-mode .about {
+    /* Dark Mode: Base background for animation */
+    background: linear-gradient(
+        270deg,
+        var(--dark-background-color),
+        var(--dark-card-background),
+        var(--dark-background-color)
+    );
+    background-size: 200% 100%; /* Ensures the gradient is wider */
+    background-position: 0% 50%; /* Initial position */
+    transition: background-position 0.6s ease-out; /* Smooth transition */
+}
+
+/* Dark mode hover for the about section background */
+html.dark-mode .about:hover {
+    background-position: 100% 50%; /* Shifts the gradient fully to the right in dark mode */
+}
+
+
+
+
+
+
+
+
+        /*------------------------------------------------------------------------- Services Section----------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Add a background for the services section if not already present */
+.services {
+    /* Updated: Base background for animation */
+    background: linear-gradient(
+        270deg, /* Gradient direction */
+        var(--background-color), /* Starting color (your default section background) */
+        var(--card-background),   /* Middle color for the gradient transition */
+        var(--background-color)   /* Ending color, matching start for seamless loop if animated */
+    );
+    background-size: 200% 100%; /* Make the background wider than the element to allow panning */
+    background-position: 0% 50%; /* Initial position of the gradient */
+    transition: background-position 0.6s ease-out; /* Smooth transition for background movement */
+
+    padding: 80px 0; /* Example padding */
+    position: relative;
+    overflow: hidden; /* Important for clipping any expansive shadows and gradient */
+}
+
+/* New: Background animation for the entire services section on hover */
+@keyframes servicesBackgroundPan {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%; /* Shifts the gradient fully to the right */
+    }
+}
+
+.services:hover {
+    background-position: 100% 50%; /* Triggers the background pan on hover */
+}
+
+
+.services .serv-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    justify-content: center;
+    padding: var(--spacing-lg) 0;
+}
+
+.services .card {
+    background: var(--card-background);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+    box-shadow: 0 8px 16px var(--shadow-color);
+    /* Refined transition for multiple properties, including border-color */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid var(--border-color); /* Initial border state */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.services .card:hover {
+    transform: translateY(-12px); /* Slightly more pronounced lift */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2); /* Deeper, more expansive shadow */
+    border-color: var(--primary-color); /* Highlight border with primary color */
+}
+
+.services .card .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.services .service-icon {
+    font-size: calc(var(--base-font-size) * 3);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    /* Use the same smooth transition for consistency */
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Add transform for a subtle pop */
+}
+
+.services .card:hover .service-icon {
+    color: var(--secondary-color); /* Change color on hover */
+    transform: scale(1.1); /* Subtle grow effect for the icon */
+}
+
+.services .card .text {
+    font-size: calc(var(--base-font-size) * 1.5);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+    color: var(--heading-color);
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transition for text color */
+}
+
+.services .card:hover .text {
+    color: var(--primary-color); /* Change text color on hover */
+}
+
+.services .card p {
+    font-size: calc(var(--base-font-size) * 0.95);
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+    transition: color 0.3s ease; /* Smooth transition for paragraph text color */
+}
+
+.services .card:hover p {
+    color: var(--text-color); /* Keeping the text color the same as default or slightly altered */
+}
+
+
+.services .card .technologies {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+.services .card .tech-tag {
+    background: var(--border-color);
+    color: var(--text-color);
+    padding: 4px 10px;
+    border-radius: var(--border-radius-sm);
+    font-size: calc(var(--base-font-size) * 0.8);
+    white-space: nowrap;
+    /* Transition for tag background and color */
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease-out;
+}
+
+.services .card:hover .tech-tag {
+    background: var(--primary-color); /* Change background to primary color on card hover */
+    color: var(--button-text-color); /* Text color for buttons */
+    transform: translateY(-2px); /* Slight lift for the tags */
+}
+
+/* Specific hover for individual tech tags if desired (overrides parent card hover for individual tag) */
+.services .card .tech-tag:hover {
+    background: var(--secondary-color); /* Secondary color on individual tag hover */
+    transform: translateY(-4px) scale(1.05); /* More pronounced lift and slight grow */
+}
+
+
+html.dark-mode .services {
+    /* Dark Mode: Base background for animation */
+    background: linear-gradient(
+        270deg,
+        var(--dark-background-color),
+        var(--dark-card-background),
+        var(--dark-background-color)
+    );
+    background-size: 200% 100%; /* Ensures the gradient is wider */
+    background-position: 0% 50%; /* Initial position */
+    transition: background-position 0.6s ease-out; /* Smooth transition */
+}
+
+html.dark-mode .services:hover {
+    background-position: 100% 50%; /* Shifts the gradient fully to the right in dark mode */
+}
+
+
+html.dark-mode .services .card {
+    background: var(--dark-card-background);
+    border: 1px solid var(--dark-border-color);
+    /* Dark mode specific hover for card border and shadow */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+html.dark-mode .services .card:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); /* Darker shadow for dark mode */
+    border-color: var(--dark-primary-color); /* Dark mode primary color for border highlight */
+}
+
+html.dark-mode .services .service-icon {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .services .card:hover .service-icon {
+    color: var(--dark-secondary-color);
+}
+
+html.dark-mode .services .card .text {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .services .card:hover .text {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .services .card p {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .services .card .tech-tag {
+    background: var(--dark-border-color);
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .services .card:hover .tech-tag {
+    background: var(--dark-primary-color);
+    color: var(--dark-button-text-color);
+}
+
+html.dark-mode .services .card .tech-tag:hover {
+    background: var(--dark-secondary-color);
+}
+
+
+
+
+
+
+
+
+
+
+        /*-------------------------------------------------------------------------- Skills Section---------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+.skills {
+    /* Base background with a linear gradient */
+    background: linear-gradient(
+        270deg, /* Gradient direction */
+        var(--background-color),      /* Start with your main background color */
+        var(--card-background),      /* Transition to your card background color */
+        var(--background-color)      /* End back at your main background color */
+    );
+    background-size: 200% 100%; /* Make the background wider to allow panning */
+    background-position: 0% 50%; /* Initial position of the gradient */
+    transition: background-position 0.6s ease-out; /* Smooth transition for background movement */
+
+    padding: 80px 0; /* Example padding, adjust as needed */
+    position: relative;
+    overflow: hidden; /* Ensures any shadows or transforms don't cause scrollbars */
+}
+
+/* No need for @keyframes skillsBackgroundPan as we're using transition on :hover */
+/* @keyframes skillsBackgroundPan {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+} */
+
+.skills:hover {
+    background-position: 100% 50%; /* Triggers the background pan on hover */
+}
+
+
+.skills .skills-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.skills .skills-content .column {
+    width: calc(50% - var(--spacing-lg));
+    padding: var(--spacing-sm);
+}
+
+.skills .skills-content .left .text {
+    font-size: calc(var(--base-font-size) * 1.5);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--heading-color);
+}
+
+.skills .skills-content .left p {
+    text-align: justify;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+}
+
+.skills .skills-content .left .soft-skills {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--background-color);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 4px var(--shadow-color);
+    /* Add transition for hover effect */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Hover effect for soft skills box */
+.skills .skills-content .left .soft-skills:hover {
+    transform: translateY(-5px); /* Lift slightly */
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow and an outer shadow */
+}
+
+
+html.dark-mode .skills .skills-content .left .soft-skills {
+    background: var(--dark-background-color);
+    /* Dark mode hover effect for soft skills box */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+html.dark-mode .skills .skills-content .left .soft-skills:hover {
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.2); /* Darker shadow for dark mode */
+}
+
+
+.skills .skills-content .left .soft-skills h3 {
+    font-size: calc(var(--base-font-size) * 1.125);
+    margin-bottom: var(--spacing-xs);
+    color: var(--primary-color);
+}
+
+.skills .skills-content .left .soft-skills ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.skills .skills-content .left .soft-skills ul li {
+    font-size: calc(var(--base-font-size) * 0.95);
+    margin-bottom: 5px;
+    color: var(--text-color);
+    position: relative;
+    padding-left: var(--spacing-md);
+    /* Add transition for list items */
+    transition: transform 0.2s ease-out, color 0.2s ease-out;
+}
+
+/* Hover effect for individual soft skill list items */
+.skills .skills-content .left .soft-skills ul li:hover {
+    transform: translateX(5px); /* Slide slightly to the right */
+    color: var(--primary-color); /* Highlight text color */
+}
+
+.skills .skills-content .left .soft-skills ul li::before {
+    content: "•";
+    color: var(--secondary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: var(--spacing-sm);
+    margin-left:-var(--spacing-md);
+    /* Add transition for bullet color */
+    transition: color 0.2s ease-out;
+}
+
+/* Hover effect for soft skill bullet points */
+.skills .skills-content .left .soft-skills ul li:hover::before {
+    color: var(--primary-color); /* Change bullet color to primary */
+}
+
+
+.skills .skills-content .right .skill-item {
+    margin-bottom: var(--spacing-md);
+    /* Add transition for skill item hover (lift and shadow) */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: var(--background-color); /* Ensure a background for shadow */
+    padding: var(--spacing-sm); /* Add some padding so shadow doesn't clip */
+    border-radius: var(--border-radius-md); /* Match existing radius */
+    box-shadow: 0 2px 4px var(--shadow-color); /* Initial shadow */
+}
+
+/* Hover effect for individual skill items */
+.skills .skills-content .right .skill-item:hover {
+    transform: translateY(-5px); /* Lift slightly */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+}
+
+html.dark-mode .skills .skills-content .right .skill-item {
+    background: var(--dark-background-color);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+html.dark-mode .skills .skills-content .right .skill-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Darker shadow for dark mode */
+}
+
+
+.skills .skills-content .right .skill-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.skills .skills-content .right .skill-icon {
+    font-size: calc(var(--base-font-size) * 2);
+    margin-right: var(--spacing-sm);
+    color: var(--primary-color);
+    /* Add transition for icon color change */
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for skill icons (when their parent skill-item is hovered) */
+.skills .skills-content .right .skill-item:hover .skill-icon {
+    color: var(--secondary-color); /* Change icon color on hover */
+}
+
+
+.skills .skills-content .right .info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.skills .skills-content .right .info span {
+    font-weight: 500;
+    font-size: calc(var(--base-font-size) * 1.125);
+    color: var(--heading-color);
+    /* Add transition for info text color */
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for skill info text */
+.skills .skills-content .right .skill-item:hover .info span {
+    color: var(--primary-color); /* Change text color on hover */
+}
+
+
+.skills .skills-content .right .skill-bar {
+    height: 8px;
+    width: 100%;
+    background: var(--border-color);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    margin-top: 5px;
+    /* Add transition for skill bar background */
+      transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.2s ease-out;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Hover effect for skill bar background */
+.skills .skills-content .right .skill-item:hover .skill-bar {
+    background: var(--primary-color); /* Fill the bar with primary color on hover */
+}
+
+
+.skills .skills-content .right .skill-progress {
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: var(--border-radius-sm);
+    width: 0%;
+    animation: progress-animation 1s ease-out forwards;
+    /* Add transition for progress bar color */
+    transition: background 0.3s ease;
+}
+
+/* Hover effect for skill progress bar */
+.skills .skills-content .right .skill-item:hover .skill-progress {
+    background: var(--secondary-color); /* Change progress color to secondary */
+}
+
+
+@keyframes progress-animation {
+    from {
+        width: 0%;
+    }
+    to {
+        /* Width defined by inline style */
+    }
+}
+
+/* Responsive Skills Section (no changes here, keeping existing) */
+@media (max-width: 768px) {
+    .skills .skills-content .column {
+        width: 100%;
+        margin-bottom: var(--spacing-lg);
+    }
+    .skills .skills-content .column:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Dark Mode Styles */
+html.dark-mode .skills {
+      /* Dark Mode: Base background for animation */
+    background: linear-gradient(
+        270deg,
+        var(--dark-background-color),
+        var(--dark-card-background),
+        var(--dark-background-color)
+    );
+    background-size: 200% 100%; /* Ensures the gradient is wider */
+    background-position: 0% 50%; /* Initial position */
+    transition: background-position 0.6s ease-out; /* Smooth transition */
+}
+
+/* CORRECTED: Dark mode hover for the skills section background */
+html.dark-mode .skills:hover {
+    background-position: 100% 50%; /* Shifts the gradient fully to the right in dark mode */
+}
+
+
+html.dark-mode .skills .skills-content .left .text {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .skills .skills-content .left p {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .skills .skills-content .left .soft-skills h3 {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .skills .skills-content .left .soft-skills ul li {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .skills .skills-content .left .soft-skills ul li::before {
+    color: var(--dark-secondary-color);
+}
+
+/* Dark mode specific hover for soft skill bullet points */
+html.dark-mode .skills .skills-content .left .soft-skills ul li:hover::before {
+    color: var(--dark-primary-color);
+}
+
+/* Dark mode specific hover for soft skill list items */
+html.dark-mode .skills .skills-content .left .soft-skills ul li:hover {
+    color: var(--dark-primary-color);
+}
+
+
+html.dark-mode .skills .skills-content .right .skill-icon {
+    color: var(--dark-primary-color);
+}
+
+/* Dark mode specific hover for skill icons */
+html.dark-mode .skills .skills-content .right .skill-item:hover .skill-icon {
+    color: var(--dark-secondary-color);
+}
+
+html.dark-mode .skills .skills-content .right .info span {
+    color: var(--dark-heading-color);
+}
+
+/* Dark mode specific hover for skill info text */
+html.dark-mode .skills .skills-content .right .skill-item:hover .info span {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .skills .skills-content .right .skill-bar {
+    background: var(--dark-border-color);
+}
+
+/* Dark mode specific hover for skill bar background */
+html.dark-mode .skills .skills-content .right .skill-item:hover .skill-bar {
+    background: var(--dark-primary-color);
+}
+
+html.dark-mode .skills .skills-content .right .skill-progress {
+    background: var(--dark-primary-color);
+}
+
+/* Dark mode specific hover for skill progress bar */
+html.dark-mode .skills .skills-content .right .skill-item:hover .skill-progress {
+    background: var(--dark-secondary-color);
+}
+
+
+
+
+
+
+
+
+
+
+        /* ----------------------------------------------------------------Projects Section--------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+/* Projects Section Styling */
+.projects {
+    /* Updated: Base background with a linear gradient, similar to services */
+    background: linear-gradient(
+        270deg, /* Gradient direction */
+        var(--background-color),   /* Start with your main background color */
+        var(--card-background),     /* Transition to your card background color */
+        var(--background-color)     /* End back at your main background color */
+    );
+    background-size: 200% 100%; /* Make the background wider to allow panning */
+    background-position: 0% 50%; /* Initial position of the gradient */
+    transition: background-position 0.6s ease-out; /* Smooth transition for background movement */
+
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden; /* Ensures any shadows or transforms don't cause scrollbars */
+}
+
+/* New: Background animation for the entire projects section on hover */
+/* You can reuse the @keyframes servicesBackgroundPan or create a new one if different animation is desired */
+/* For simplicity and consistency, let's reuse servicesBackgroundPan */
+@keyframes projectsBackgroundPan {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+} 
+
+.projects:hover {
+    background-position: 100% 50%; /* Triggers the background pan on hover */
+}
+
+/* Filters Section */
+.projects .filters {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.projects .filter-btn {
+    background: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: var(--border-radius-sm);
+    font-size: calc(var(--base-font-size) * 1);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.2s ease-out;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Dark Mode for Filter Buttons */
+html.dark-mode .projects .filter-btn {
+    background: var(--dark-background-color);
+    color: var(--dark-text-color);
+    border-color: var(--dark-border-color);
+}
+
+/* Filter Button Hover & Active States */
+.projects .filter-btn:hover,
+.projects .filter-btn.active {
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode for Filter Button Hover & Active States */
+html.dark-mode .projects .filter-btn:hover,
+html.dark-mode .projects .filter-btn.active {
+    background: var(--dark-primary-color);
+    color: var(--dark-button-text-color);
+    border-color: var(--dark-primary-color);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Project Cards Grid */
+.projects .projects-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    justify-content: center;
+    padding: var(--spacing-lg) 0;
+}
+
+/* Individual Project Card */
+.projects .project-card {
+    background: var(--card-background);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 8px 16px var(--shadow-color);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Project Card Hover Effect */
+.projects .project-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
+}
+
+/* Dark Mode for Project Card Hover Effect */
+html.dark-mode .projects .project-card {
+    background: var(--dark-card-background);
+    border-color: var(--dark-border-color);
+}
+
+html.dark-mode .projects .project-card:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+    border-color: var(--dark-primary-color);
+}
+
+/* Project Icon */
+.projects .project-icon {
+    font-size: calc(var(--base-font-size) * 2.5);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Project Icon Hover Effect (when parent card is hovered) */
+.projects .project-card:hover .project-icon {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Dark Mode for Project Icon Hover Effect */
+html.dark-mode .projects .project-icon {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .projects .project-card:hover .project-icon {
+    color: var(--dark-secondary-color);
+}
+
+/* Project Header */
+.projects .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Project Title */
+.projects .project-header h3 {
+    font-size: calc(var(--base-font-size) * 1.375);
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-right: var(--spacing-sm);
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Project Title Hover Effect (when parent card is hovered) */
+.projects .project-card:hover .project-header h3 {
+    color: var(--primary-color);
+}
+
+/* Dark Mode for Project Title */
+html.dark-mode .projects .project-header h3 {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .projects .project-card:hover .project-header h3 {
+    color: var(--dark-primary-color);
+}
+
+/* Project Links (e.g., GitHub, Demo) */
+.projects .project-links {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.projects .project-link {
+    font-size: calc(var(--base-font-size) * 1.25);
+    color: var(--text-color);
+    transition: color 0.3s ease, transform 0.2s ease-out;
+}
+
+/* Project Link Hover Effect */
+.projects .project-link:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Dark Mode for Project Link */
+html.dark-mode .projects .project-link {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .projects .project-link:hover {
+    color: var(--dark-primary-color);
+}
+
+/* Project Description */
+.projects .project-description {
+    font-size: calc(var(--base-font-size) * 0.95);
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+    transition: color 0.3s ease;
+}
+
+/* Project Description Hover Effect (optional subtle change) */
+.projects .project-card:hover .project-description {
+    color: var(--text-color);
+}
+
+/* Dark Mode for Project Description */
+html.dark-mode .projects .project-description {
+    color: var(--dark-text-color);
+}
+
+/* Project Tags */
+.projects .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+.projects .project-tags .tag {
+    background: var(--border-color);
+    color: var(--text-color);
+    padding: 4px 10px;
+    border-radius: var(--border-radius-sm);
+    font-size: calc(var(--base-font-size) * 0.8);
+    white-space: nowrap;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease-out;
+}
+
+/* Project Tags Hover Effect (when parent card is hovered) */
+.projects .project-card:hover .project-tags .tag {
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    transform: translateY(-2px);
+}
+
+/* Individual Tag Hover Effect (overrides card hover for specific tag) */
+.projects .project-tags .tag:hover {
+    background: var(--secondary-color);
+    transform: translateY(-4px) scale(1.05);
+}
+
+/* Dark Mode for Project Tags */
+html.dark-mode .projects .project-tags .tag {
+    background: var(--dark-border-color);
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .projects .project-card:hover .project-tags .tag {
+    background: var(--dark-primary-color);
+    color: var(--dark-button-text-color);
+}
+
+html.dark-mode .projects .project-tags .tag:hover {
+    background: var(--dark-secondary-color);
+}
+
+
+/* Project Actions (e.g., View Project Button) */
+.projects .project-actions {
+    margin-top: var(--spacing-md);
+    text-align: center;
+}
+
+.projects .view-project-btn {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: calc(var(--base-font-size) * 1);
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projects .view-project-btn:hover {
+    color: var(--secondary-color);
+    transform: translateX(8px);
+}
+
+/* Dark Mode for View Project Button */
+html.dark-mode .projects .view-project-btn {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .projects .view-project-btn:hover {
+    color: var(--dark-secondary-color);
+}
+
+/* Button Arrow within View Project Button */
+.projects .view-project-btn .btn-arrow {
+    margin-left: 8px;
+    font-size: calc(var(--base-font-size) * 1.125);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projects .view-project-btn:hover .btn-arrow {
+    transform: translateX(8px);
+}
+
+/* View More Section */
+.projects .view-more {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+}
+
+/* View More Button */
+.projects .view-more-btn {
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    padding: 12px 25px;
+    border-radius: var(--border-radius-sm);
+    font-size: calc(var(--base-font-size) * 1.125);
+    font-weight: 500;
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+/* View More Button Hover Effect */
+.projects .view-more-btn:hover {
+    background: none;
+    color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    border-color: var(--primary-color);
+}
+
+/* Dark Mode for View More Button */
+html.dark-mode .projects .view-more-btn {
+    background: var(--dark-primary-color);
+    color: var(--dark-button-text-color);
+    border-color: var(--dark-primary-color);
+    box-shadow: 0 4px 8px var(--dark-shadow-color);
+}
+
+html.dark-mode .projects .view-more-btn:hover {
+    background: none;
+    color: var(--dark-primary-color);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border-color: var(--dark-primary-color);
+}
+
+
+
+
+
+
+
+
+
+
+        /* ----------------------------------------------------------------------Internships Section----------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+/* Internships Section Styling */
+.internships {
+    /* Updated: Base background with a linear gradient, consistent with projects/services */
+    background: linear-gradient(
+        270deg, /* Gradient direction */
+        var(--background-color),   /* Start with your main background color */
+        var(--card-background),     /* Transition to your card background color */
+        var(--background-color)     /* End back at your main background color */
+    );
+    background-size: 200% 100%; /* Make the background wider to allow panning */
+    background-position: 0% 50%; /* Initial position of the gradient */
+    transition: background-position 0.6s ease-out; /* Smooth transition for background movement */
+
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden; /* Ensures any shadows or transforms don't cause scrollbars */
+}
+
+/* New: Background animation for the entire internships section on hover */
+/* Reusing the @keyframes servicesBackgroundPan or defining a new one for clarity */
+/* If servicesBackgroundPan is global, you don't need to define it again. */
+/* If not, uncomment and define it here:*/
+@keyframes internshipsBackgroundPan {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.internships:hover {
+    background-position: 100% 50%; /* Triggers the background pan on hover */
+}
+
+
+.internships .internships-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    justify-content: center;
+    padding: var(--spacing-lg) 0;
+}
+
+.internships .internship-card {
+    background: var(--card-background);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: 0 8px 16px var(--shadow-color);
+    /* Refined transition for multiple properties, including border-color */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid var(--border-color); /* Initial border state */
+    display: flex;
+    flex-direction: column;
+}
+
+.internships .internship-card:hover {
+    transform: translateY(-12px); /* Slightly more pronounced lift */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2); /* Deeper, more expansive shadow */
+    border-color: var(--primary-color); /* Highlight border with primary color */
+}
+
+.internships .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.internships .company-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: var(--spacing-md);
+    flex-shrink: 0;
+    border: 2px solid var(--primary-color);
+    /* Add transition for border-color and transform */
+    transition: border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.internships .internship-card:hover .company-logo {
+    border-color: var(--secondary-color); /* Change border color on card hover */
+    transform: scale(1.05); /* Slight grow for the logo */
+}
+
+.internships .company-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Add transition for image for future effects if desired */
+    transition: transform 0.3s ease;
+}
+
+.internships .company-info h3 {
+    font-size: calc(var(--base-font-size) * 1.375);
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 4px;
+    /* Add transition for text color */
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.internships .internship-card:hover .company-info h3 {
+    color: var(--primary-color); /* Change text color on card hover */
+}
+
+.internships .company-name {
+    font-size: calc(var(--base-font-size) * 0.95);
+    color: var(--text-color);
+    /* Add transition for text color */
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.internships .internship-card:hover .company-name {
+    color: var(--text-color); /* Keep or subtly change text color on hover */
+}
+
+.internships .card-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.internships .detail-item {
+    display: flex;
+    align-items: center;
+    font-size: calc(var(--base-font-size) * 0.95);
+    color: var(--text-color);
+    /* Add transition for text color and icon */
+    transition: color 0.3s ease;
+}
+
+.internships .internship-card:hover .detail-item {
+    color: var(--text-color); /* Keeping consistent or can be changed */
+}
+
+.internships .detail-icon {
+    margin-right: var(--spacing-xs);
+    color: var(--primary-color);
+    font-size: calc(var(--base-font-size) * 1.125);
+    /* Add transition for color and transform */
+    transition: color 0.3s ease, transform 0.2s ease-out;
+}
+
+.internships .internship-card:hover .detail-icon {
+    color: var(--secondary-color); /* Change icon color on card hover */
+    transform: translateY(-2px); /* Subtle lift for the icon */
+}
+
+.internships .technologies {
+    margin-bottom: var(--spacing-md);
+}
+
+.internships .technologies h4 {
+    font-size: calc(var(--base-font-size) * 1.125);
+    margin-bottom: var(--spacing-xs);
+    color: var(--heading-color);
+    /* Add transition for text color */
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.internships .internship-card:hover .technologies h4 {
+    color: var(--primary-color); /* Change heading color on card hover */
+}
+
+.internships .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.internships .tech-tag {
+    background: var(--border-color);
+    color: var(--text-color);
+    padding: 4px 10px;
+    border-radius: var(--border-radius-sm);
+    font-size: calc(var(--base-font-size) * 0.8);
+    white-space: nowrap;
+    /* Add transition for tag properties */
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease-out;
+}
+
+/* Tech Tag Hover Effect (when parent card is hovered) */
+.internships .internship-card:hover .tech-tag {
+    background: var(--primary-color); /* Change background on card hover */
+    color: var(--button-text-color); /* Change text color on card hover */
+    transform: translateY(-2px); /* Slight lift for tags */
+}
+
+/* Individual Tech Tag Hover Effect (overrides card hover for specific tag) */
+.internships .tech-tag:hover {
+    background: var(--secondary-color); /* Change background on individual tag hover */
+    transform: translateY(-4px) scale(1.05); /* More pronounced lift and slight grow */
+}
+
+.internships .achievements {
+    flex-grow: 1;
+}
+
+.internships .achievements h4 {
+    font-size: calc(var(--base-font-size) * 1.125);
+    margin-bottom: var(--spacing-xs);
+    color: var(--heading-color);
+    /* Add transition for text color */
+    transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.internships .internship-card:hover .achievements h4 {
+    color: var(--primary-color); /* Change heading color on card hover */
+}
+
+
+.internships .achievements ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.internships .achievements ul li {
+    font-size: calc(var(--base-font-size) * 0.95);
+    margin-bottom: 5px;
+    color: var(--text-color);
+    display: flex;
+    align-items: flex-start;
+    /* Add transition for text color */
+    transition: color 0.3s ease;
+}
+
+.internships .internship-card:hover .achievements ul li {
+    color: var(--text-color); /* Keep consistent or subtly change */
+}
+
+
+.internships .achievement-icon {
+    margin-right: var(--spacing-xs);
+    color: var(--secondary-color);
+    font-size: calc(var(--base-font-size) * 1);
+    flex-shrink: 0;
+    margin-top: 3px;
+    /* Add transition for color and subtle transform */
+    transition: color 0.3s ease, transform 0.2s ease-out;
+}
+
+.internships .internship-card:hover .achievement-icon {
+    color: var(--primary-color); /* Change icon color on card hover */
+    transform: scale(1.1); /* Subtle grow effect */
+}
+
+html.dark-mode .internships {
+    /* Dark Mode: Base background with a linear gradient, consistent with services and projects */
+    background: linear-gradient(
+        270deg,
+        var(--dark-background-color),
+        var(--dark-card-background),
+        var(--dark-background-color)
+    );
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    transition: background-position 0.6s ease-out;
+}
+
+html.dark-mode .internships:hover {
+    background-position: 100% 50%;
+}
+
+html.dark-mode .internships .internship-card {
+    background: var(--dark-card-background);
+    border-color: var(--dark-border-color);
+}
+
+html.dark-mode .internships .internship-card:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4); /* Darker shadow for dark mode */
+    border-color: var(--dark-primary-color); /* Dark mode primary color for border highlight */
+}
+
+html.dark-mode .internships .company-logo {
+    border-color: var(--dark-primary-color);
+}
+
+html.dark-mode .internships .internship-card:hover .company-logo {
+    border-color: var(--dark-secondary-color);
+}
+
+html.dark-mode .internships .company-info h3 {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .internships .internship-card:hover .company-info h3 {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .internships .company-name {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .internships .detail-item {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .internships .detail-icon {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .internships .internship-card:hover .detail-icon {
+    color: var(--dark-secondary-color);
+}
+
+html.dark-mode .internships .technologies h4 {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .internships .internship-card:hover .technologies h4 {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .internships .tech-tag {
+    background: var(--dark-border-color);
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .internships .internship-card:hover .tech-tag {
+    background: var(--dark-primary-color);
+    color: var(--dark-button-text-color);
+}
+
+html.dark-mode .internships .tech-tag:hover {
+    background: var(--dark-secondary-color);
+}
+
+html.dark-mode .internships .achievements h4 {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .internships .internship-card:hover .achievements h4 {
+    color: var(--dark-primary-color);
+}
+
+html.dark-mode .internships .achievements ul li {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .internships .achievement-icon {
+    color: var(--dark-secondary-color);
+}
+
+html.dark-mode .internships .internship-card:hover .achievement-icon {
+    color: var(--dark-primary-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+   /*------------------------------------------------------------------------------- Education Section ----------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+/* Animation for the background, moved to the top for clarity */
+@keyframes backgroundPan {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.education {
+    /* Using a linear-gradient for the animation, incorporating existing variables */
+    background: linear-gradient(
+        270deg,
+        var(--background-color), /* Start with your main background color */
+        var(--card-background), /* Transition to your card background color */
+        var(--background-color) /* End back at your main background color */
+    );
+    padding: 80px 0;
+
+    /* Animation properties for initial state */
+    background-size: 200% 200%;
+    background-position: 0% 50%; /* Initial position of the gradient */
+    transition: background-position 0.6s ease-out; /* Smooth transition for background movement */
+}
+
+/* Apply background pan animation on hover for the .education section */
+.education:hover {
+    background-position: 100% 50%; /* Triggers the background pan on hover */
+}
+
+.education .title::after {
+    background: var(--card-background);
+}
+
+.education-content {
+    margin-top: var(--spacing-xl);
+}
+
+.education-timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-lg) 0;
+}
+
+.education-timeline::before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background: var(--primary-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+    border-radius: 10px;
+}
+
+.education-item {
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+    width: 100%;
+    /* Transition for overall item lift */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* material design-like acceleration */
+}
+
+.education-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Overall item lift on hover */
+.education-item:hover {
+    transform: translateY(-8px);
+}
+
+.education-icon {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    font-size: calc(var(--base-font-size) * 1.5);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    z-index: 1;
+    /* Transitions for icon */
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Icon bounce and color shift on education-item hover */
+.education-item:hover .education-icon {
+    background: var(--secondary-color);
+    transform: translateX(-50%) translateY(-5px) scale(1.1); /* Lift and scale for a 'bounce' */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.education-date {
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    background: var(--background-color);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: calc(var(--base-font-size) * 0.9);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    /* Transitions for date */
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Date color flip with a slight delay on education-item hover */
+.education-item:hover .education-date {
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    transition-delay: 0.05s; /* Small delay for a sequential feel */
+}
+
+.education-details {
+    width: calc(50% - 40px);
+    padding: 20px;
+    background: var(--background-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    position: relative;
+    /* --- Alternative: Add a distinct border and scale --- */
+    border: 2px solid transparent; /* Start with transparent border */
+    /* Transitions for details */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Details Card "Zoom" and Border Highlight on hover */
+.education-details:hover {
+    transform: scale(1.02); /* Subtle zoom */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+    border-color: var(--primary-color); /* Highlight with primary color */
+}
+
+.education-details.left {
+    left: 0;
+}
+
+.education-details.right {
+    left: calc(50% + 40px);
+}
+
+.education-details.left::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: -15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 0 15px 15px;
+    border-color: transparent transparent transparent var(--background-color);
+    transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.education-details.right::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: -15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent var(--background-color) transparent transparent;
+    transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Arrow color matches details card border on hover */
+.education-details.left:hover::after {
+    border-color: transparent transparent transparent var(--primary-color);
+}
+
+.education-details.right:hover::after {
+    border-color: transparent var(--primary-color) transparent transparent;
+}
+
+
+.education-details h3 {
+    font-size: calc(var(--base-font-size) * 1.375);
+    color: var(--heading-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.education-meta {
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.education-meta span {
+    display: flex;
+    align-items: center;
+    font-size: calc(var(--base-font-size) * 0.9);
+    color: var(--text-color);
+}
+
+.education-meta svg {
+    margin-right: 5px;
+    color: var(--primary-color);
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Meta icons color change (slight delay for effect) on details hover */
+.education-details:hover .education-meta svg {
+    color: var(--secondary-color);
+    transition-delay: 0.08s; /* Slight delay */
+}
+
+.education-details p {
+    color: var(--text-color);
+    font-size: calc(var(--base-font-size) * 0.95);
+    line-height: 1.5;
+}
+
+/* Responsive Education Timeline */
+@media (max-width: 768px) {
+    .education-timeline::before {
+        left: 40px;
+    }
+
+    .education-icon {
+        left: 40px;
+    }
+
+    .education-date {
+        left: 40px;
+        top: 30px;
+    }
+
+    .education-details {
+        width: calc(100% - 90px);
+        left: 80px !important;
+    }
+
+    .education-details.left::after,
+    .education-details.right::after {
+        left: -15px;
+        border-width: 15px 15px 15px 0;
+        border-color: transparent var(--background-color) transparent transparent;
+    }
+
+    /* Ensure hover effects are consistent in responsive view */
+    .education-details.left:hover::after {
+        border-color: transparent var(--primary-color) transparent transparent; /* Arrow matches primary color */
+    }
+    .education-details.right:hover::after {
+        border-color: transparent var(--primary-color) transparent transparent; /* Arrow matches primary color */
+    }
+}
+
+@media (max-width: 500px) {
+    .education-meta {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+}
+
+/* Dark Mode Styles */
+html.dark-mode .education {
+    /* Use dark mode variables for gradient */
+    background: linear-gradient(
+        270deg,
+        var(--dark-background-color),
+        var(--dark-card-background),
+        var(--dark-background-color)
+    );
+    background-size: 200% 200%; /* Ensures the gradient is wider */
+    background-position: 0% 50%; /* Initial position */
+    transition: background-position 0.6s ease-out; /* Smooth transition */
+}
+
+/* Dark Mode: Apply background pan animation on hover for the .education section */
+html.dark-mode .education:hover {
+    background-position: 100% 50%; /* Shifts the gradient fully to the right in dark mode */
+}
+
+html.dark-mode .education .title::after {
+    background: var(--dark-card-background);
+}
+
+html.dark-mode .education-details {
+    background: var(--dark-background-color);
+    /* Dark mode specific border on hover */
+    border: 2px solid transparent; /* Ensure transparent border initially */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode: Border Highlight & Zoom on hover */
+html.dark-mode .education-details:hover {
+    border-color: var(--dark-primary-color); /* Highlight with dark primary color */
+}
+
+
+html.dark-mode .education-details.left::after {
+    border-color: transparent transparent transparent var(--dark-background-color);
+}
+
+html.dark-mode .education-details.right::after {
+    border-color: transparent var(--dark-background-color) transparent transparent;
+}
+
+/* Dark Mode: Arrow color matches dark primary color on hover */
+html.dark-mode .education-details.left:hover::after {
+    border-color: transparent transparent transparent var(--dark-primary-color);
+}
+
+html.dark-mode .education-details.right:hover::after {
+    border-color: transparent var(--dark-primary-color) transparent transparent;
+}
+
+html.dark-mode .education-details h3 {
+    color: var(--dark-heading-color);
+}
+
+html.dark-mode .education-meta span {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .education-details p {
+    color: var(--dark-text-color);
+}
+
+html.dark-mode .education-date {
+    background: var(--dark-background-color);
+    color: var(--dark-primary-color);
+}
+
+/* Dark Mode: Education Icon hover color */
+html.dark-mode .education-item:hover .education-icon {
+    background: var(--dark-secondary-color); /* Ensure dark secondary color is used */
+}
+
+/* Dark Mode: Education Date hover color */
+html.dark-mode .education-item:hover .education-date {
+    background: var(--dark-primary-color); /* Use dark primary color */
+    color: var(--dark-button-text-color); /* Use dark button text color */
+}
+
+/* Dark Mode: Meta icon color change on details hover */
+html.dark-mode .education-details:hover .education-meta svg {
+    color: var(--dark-secondary-color); /* Use dark secondary color */
+}
+
+
+
+
+
+
+
+
+
+
+        /* ----------------------------------------------------------------------Contact Section---------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+/* Base Contact Section Styling */
+.contact {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+
+    /* --- Background for Animation (User's original, no change) --- */
+    background: linear-gradient(
+        270deg,
+        var(--background-color),
+        var(--card-background),
+        var(--background-color)
+    );
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    transition: background-position 0.5s ease-out;
+}
+
+/* --- Hover Effect for the Contact Background (User's original, no change) --- */
+.contact:hover {
+    background-position: 100% 50%;
+}
+
+/* Max-width container for content centering */
+.contact .max-width {
+    max-width: 1300px; /* Adjust as needed for your layout */
+    padding: 0 20px; /* Horizontal padding */
+    margin: 0 auto; /* Center the content */
+}
+
+/* Section Title */
+
+
+/* Contact Content Layout */
+.contact .contact-content {
+    display: flex;
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+    align-items: flex-start; /* Aligns items to the top */
+    justify-content: space-between;
+    gap: var(--spacing-lg); /* Space between columns */
+}
+
+.contact .contact-content .column {
+    /* Adjusted width to account for gap, ensuring 50% on larger screens */
+    width: calc(50% - (var(--spacing-lg) / 2));
+    padding: var(--spacing-sm);
+    background: var(--card-background); /* Card background for columns */
+    border-radius: var(--border-radius-md); /* Rounded corners for columns */
+    box-shadow: 0 5px 15px var(--shadow-color); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact .contact-content .column:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.contact .contact-content .text {
+    font-size: calc(var(--base-font-size) * 1.5);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--heading-color);
+}
+
+.contact .contact-content .subtext {
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Icons and Info Rows */
+.contact .contact-content .icons .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.contact .contact-content .icons .icon {
+    font-size: calc(var(--base-font-size) * 1.5);
+    color: var(--primary-color);
+    margin-right: var(--spacing-md);
+    transition: color 0.3s ease;
+}
+
+.contact .contact-content .icons .row:hover .icon {
+    color: var(--secondary-color); /* Change icon color on row hover */
+}
+
+.contact .contact-content .icons .info .head {
+    font-weight: 500;
+    color: var(--heading-color);
+    font-size: calc(var(--base-font-size) * 1.125);
+}
+
+.contact .contact-content .icons .info .sub-title {
+    color: var(--text-color);
+    font-size: calc(var(--base-font-size) * 0.95);
+}
+
+.contact .contact-content .icons .info .sub-title a {
+    color: var(--link-color);
+    text-decoration: none; /* Remove default underline */
+    transition: color 0.3s ease;
+}
+
+.contact .contact-content .icons .info .sub-title a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline; /* Add underline on hover */
+}
+
+.map-embed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: auto;
+  margin: 40px auto;
+  padding: 20px 0;
+}
+
+.map-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Circular Map Styling */
+.map-embed iframe {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.map-embed iframe:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Form Styles */
+.contact .right form .fields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contact .right form .field,
+.contact .right form .fields .field {
+    width: 100%;
+    margin-bottom: var(--spacing-md);
+}
+
+.contact .right form .field.name,
+.contact .right form .field.email {
+    width: calc(50% - var(--spacing-xs)); /* Half width minus half the gap between them */
+}
+
+.contact .right form .field input,
+.contact .right form .textarea textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border);
+    background: var(--input-background);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-poppins);
+    font-size: calc(var(--base-font-size) * 1);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact .right form .field input:focus,
+.contact .right form .textarea textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2); /* Focus ring effect */
+}
+
+.contact .right form .textarea textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 120px; /* Minimum height for textarea */
+    padding-top: 12px; /* Ensure padding for text */
+}
+
+.contact .right form .button-area {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+}
+
+.contact .right form .submit-btn {
+    display: inline-flex; /* Allows icon and text to be on the same line */
+    align-items: center; /* Vertically align icon and text */
+    justify-content: center; /* Center content within button */
+    gap: 8px; /* Space between icon and text */
+
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    font-size: calc(var(--base-font-size) * 1.1);
+    font-weight: 500;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-sm);
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    outline: none; /* Remove outline on focus for better custom styling */
+}
+
+.contact .right form .submit-btn:hover {
+    background: none;
+    color: var(--primary-color);
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+/* Spinner Animation */
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Disabled Button State */
+.contact .right form .submit-btn:disabled {
+    opacity: 0.7; /* Make it slightly transparent */
+    cursor: not-allowed; /* Indicate it's not clickable */
+    background-color: #ccc; /* Grey background when disabled */
+    border-color: #ccc; /* Grey border when disabled */
+    color: #666; /* Darker text color when disabled */
+    transform: none; /* Remove transform on disabled state */
+    box-shadow: none; /* Remove shadow on disabled state */
+}
+
+/* Message Status Styles */
+.message-status {
+    padding: 10px 15px;
+    margin-top: 20px; /* More space above the message */
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Smooth fade for message */
+    animation: fadeInOut 5s forwards; /* Animation to fade out automatically */
+}
+
+.message-status.success {
+    background-color: #d4edda; /* Light green */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Green border */
+}
+
+.message-status.error {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Red border */
+}
+
+/* Keyframes for fade out animation */
+@keyframes fadeInOut {
+    0% { opacity: 0; } /* Start invisible */
+    10% { opacity: 1; } /* Fade in quickly */
+    90% { opacity: 1; } /* Stay visible */
+    100% { opacity: 0; display: none; } /* Fade out and then hide */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .contact .contact-content .column {
+        width: 100%; /* Columns stack on smaller screens */
+        margin-bottom: var(--spacing-lg); /* Space between stacked columns */
+    }
+
+    .contact .contact-content {
+        flex-direction: column; /* Ensure columns stack */
+        gap: 0; /* Remove gap when stacked, use margin-bottom on columns instead */
+    }
+
+    .contact .contact-content .map-embed {
+        margin-top: var(--spacing-lg); /* Ensure map has space above it when stacked */
+    }
+}
+
+@media (max-width: 768px) {
+    .contact .title {
+        font-size: calc(var(--base-font-size) * 2); /* Smaller title on mobile */
+    }
+
+    .contact .contact-content .text {
+        font-size: calc(var(--base-font-size) * 1.3); /* Smaller column titles */
+    }
+
+    .contact .right form .field.name,
+    .contact .right form .field.email {
+        width: 100%; /* Inputs take full width on smaller screens */
+    }
+
+    .contact .right form .button-area {
+        margin-top: var(--spacing-md); /* Adjust button area margin */
+    }
+}
+
+@media (max-width: 480px) {
+    .contact {
+        padding: 60px 0; /* Reduce overall padding */
+    }
+
+    .contact .max-width {
+        padding: 0 15px; /* Reduce horizontal padding */
+    }
+
+    .contact .title::after {
+        font-size: calc(var(--base-font-size) * 0.8); /* Smaller subtitle */
+    }
+
+    .contact .right form .submit-btn {
+        font-size: calc(var(--base-font-size) * 1); /* Smaller button text */
+        padding: 10px 20px; /* Smaller button padding */
+    }
+
+    /* Adjust circular map for mobile */
+    .contact .contact-content .map-embed {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+        /* -----------------------------------------------------------------------------Footer Section------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+footer {
+    height: 50px; /* Reduced height */
+    background: var( --background-color);
+    padding: var(--spacing-sm) 0; /* Smaller padding */
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    font-size: 12px; /* Optional: reduce text size */
+}
+
+        footer .text {
+            font-size: calc(var(--base-font-size) * 1.125);
+            color: blue;
+            margin-bottom: var(--spacing-md);
+        }
+
+        footer .text span {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        footer .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            font-size: calc(var(--base-font-size) * 1.25);
+            transition: var(--transition-ease);
+        }
+
+        footer .social-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px var(--shadow-color);
+        }
+
+        footer .copyright {
+            font-size: calc(var(--base-font-size) * 0.9);
+            color: var(--primary-color);
+        }
+
+
+
+
+
+
+
+
+        /* --------------------------------------------------------------------Responsive Media Queries------------------------------------------------------------------- */
+
+
+
+
+ 
+        @media (max-width: 1300px) {
+            .navbar .menu li {
+                margin: 0 var(--spacing-xs);
+            }
+
+            .home .home-content .text-2 {
+                font-size: calc(var(--base-font-size) * 3);
+            }
+
+            .home .home-content .text-3 {
+                font-size: calc(var(--base-font-size) * 2);
+            }
+
+            .about .about-content .left img {
+                height: 350px;
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .about .about-content .column,
+            .skills .skills-content .column,
+            .contact .contact-content .column {
+                width: 100%;
+            }
+
+            .about .about-content .left,
+            .skills .skills-content .left,
+            .contact .contact-content .left {
+                margin-bottom: var(--spacing-xl);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about .about-content .right,
+            .skills .skills-content .right,
+            .contact .contact-content .right {
+                width: 100%;
+            }
+
+            .contact .right form .field.name,
+            .contact .right form .field.email {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --base-font-size: 15px;
+            }
+
+            .navbar .menu {
+                margin-top: 100px;
+                position: fixed;
+                height: 100vh;
+                width: 100%;
+                left: -100%;
+                top: 0;
+                background: var(--card-background);
+                text-align: center;
+                padding-top: 80px;
+                transition: var(--transition-ease);
+                flex-direction: column;
+                z-index: 998;
+            }
+
+            .navbar .menu.active {
+                left: 0;
+            }
+
+            .navbar .menu li {
+                margin: var(--spacing-md) 0;
+            }
+
+            .navbar .menu li a,
+            .navbar .menu li button {
+                font-size: calc(var(--base-font-size) * 1.5);
+                display: inline-block;
+            }
+
+            .navbar .hamburger {
+                display: block;
+                z-index: 999;
+            }
+
+            .navbar .hamburger.active i::before {
+                content: "\f00d";
+            }
+
+            .home .home-content .text-2 {
+                font-size: calc(var(--base-font-size) * 2.5);
+            }
+
+            .home .home-content .text-3 {
+                font-size: calc(var(--base-font-size) * 1.75);
+            }
+
+            .title {
+                font-size: calc(var(--base-font-size) * 2);
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 500px) {
+            :root {
+                --base-font-size: 14px;
+            }
+
+            .home .home-content .text-2 {
+                font-size: calc(var(--base-font-size) * 2.2);
+            }
+
+            .home .home-content .text-3 {
+                font-size: calc(var(--base-font-size) * 1.5);
+            }
+
+            .home .home-content .hire-me-btn {
+                font-size: calc(var(--base-font-size) * 1.125);
+                padding: 10px 20px;
+            }
+
+            .about .about-content .left img {
+                height: 280px;
+                width: 280px;
+            }
+
+            .services .serv-content,
+            .projects .projects-content,
+            .internships .internships-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: calc(var(--base-font-size) * 1.8);
+            }
+        }
+
+        @media (max-width: 400px) {
+            :root {
+                --base-font-size: 13px;
+            }
+
+            .home .home-content .text-2 {
+                font-size: calc(var(--base-font-size) * 2);
+            }
+
+            .home .home-content .text-1 {
+                font-size: calc(var(--base-font-size) * 1.25);
+            }
+
+            .home .home-content .text-3 {
+                font-size: calc(var(--base-font-size) * 1.375);
+            }
+
+            .btn {
+                font-size: calc(var(--base-font-size) * 1.125);
+                padding: 8px 16px;
+            }
+
+            .title {
+                font-size: calc(var(--base-font-size) * 1.6);
+            }
+
+            footer .social-links {
+                gap: var(--spacing-md);
+            }
+        }
