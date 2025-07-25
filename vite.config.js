@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: '/rajarajeshwaran-webfolio-/', // 👈 This must match your GitHub repo name
+export default defineConfig({ // 👈 This must match your GitHub repo name
   plugins: [react()],
 });
